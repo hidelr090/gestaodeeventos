@@ -1,29 +1,16 @@
 import express, {Express} from 'express';
-import path from 'path';
-import allowCors from './config/cors';
-import router from './routes/index';
+import allowCors from './config/cors.js';
+import router from './routes/index.js';
+import swaggerUi from 'swagger-ui-express';
+import './database/connection.js';
 
-class App{
-    
-    public server: Express;
+const app: Express = express();
 
-    constructor () {
-        this.server = express();
-        this.middlewares();
-        this.routes();
-    }
+app.use(express.json());
+app.use(allowCors);
+app.use(router);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerUi));
+app.use('/ftp', express.static('data/uploads'));   
 
-    middlewares () {
-        this.server.use(express.json());
-        this.server.use(allowCors);
-        this.server.use(express.static(path.resolve(__dirname, '..', 'public')));
-    }
-
-    routes () {
-        this.server.use(router);
-    }
-}
-
-export default new App().server;
-
+export default app;
 

@@ -1,0 +1,24 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API APP GESTAO DE EVENTOS",
+        "version": "1.0.0",
+        "description": "API REST para acesso aos dados da aplicação de gestão de eventos",
+        "termsOfService": "",
+        "contact": {
+            "name": "Hidelgardo Ramirez",
+            "url": "",
+            "email": "hidelgardo503@gmail.com"
+        },
+        "servers": [
+            {
+                "url": "http://localhost:8080/api/v1",
+                "description": "Servidor de teste"
+            }
+        ],
+        "license": {
+            "name": "",
+            "url": ""
+        }
+    }
+}
