@@ -12,7 +12,7 @@ class TicketController {
                     event_id: req.query.event_id
                 }
             });
-            return tickets ? res.json(tickets) : res.status(404).json({ message: "Tickets não encontrados!" });
+            return tickets ? res.json(tickets) : res.status(400).json({ message: "Tickets não encontrados!" });
         } catch (err) {
             return res.status(500).json({
                 message: "Erro ao listar tickets",

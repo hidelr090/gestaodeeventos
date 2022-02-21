@@ -14,7 +14,7 @@ class CustomerController {
                     email: customer.email,
                 }});
             
-            return customers ? res.json(result) : res.status(404).json({message: 'Clientes nao encontrados!'});
+            return customers ? res.json(result) : res.status(400).json({message: 'Clientes nao encontrados!'});
         }catch(err) {
             return res.status(500).json({
                 message: 'Erro ao listar clientes',
@@ -31,7 +31,7 @@ class CustomerController {
             if(found.length === 0){
                 customer = await customerRepository.save(req.body);
             }
-            return customer ? res.status(200).json({message: 'Cliente cadastrado com sucesso!'}) : res.status(409).json({message: 'Cliente ja cadastrado!'});
+            return customer ? res.status(200).json({message: 'Cliente cadastrado com sucesso!'}) : res.status(400).json({message: 'Cliente ja cadastrado!'});
 
         }catch(err){
             return res.status(500).json({

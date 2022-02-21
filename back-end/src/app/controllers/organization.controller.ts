@@ -16,7 +16,7 @@ class OrganizationController {
                     address: organization.address,                
                 }
             });
-            return organizations ? res.json(result) : res.status(404).json({message: 'Organizações não encontradas!'});
+            return organizations ? res.json(result) : res.status(400).json({message: 'Organizações não encontradas!'});
         }catch(err) {
             return res.status(500).json({
                 message: 'Erro ao listar organizações',
@@ -33,7 +33,7 @@ class OrganizationController {
             if(found.length === 0){
                 organization = await organizationRepository.save(req.body);
             }
-            return organization ? res.status(200).json({message: 'Organização cadastrada com sucesso!'}) : res.status(409).json({message: 'Organização ja cadastrada!'});
+            return organization ? res.status(200).json({message: 'Organização cadastrada com sucesso!'}) : res.status(400).json({message: 'Organização ja cadastrada!'});
         }catch(err){
             return res.status(500).json({
                 message: 'Erro ao salvar Empresa',

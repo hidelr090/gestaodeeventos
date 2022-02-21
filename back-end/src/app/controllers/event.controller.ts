@@ -7,7 +7,7 @@ class EventController{
     async index(req: Request, res: Response) : Promise<object> {
         try {
             const events = await getRepository(Event).find();
-            return events ? res.json(events) : res.status(404).json({message: 'Eventos nao encontrados!'});
+            return events ? res.json(events) : res.status(400).json({message: 'Eventos nao encontrados!'});
         }catch(err) {
             return res.status(500).json({
                 message: 'Erro ao listar eventos',
@@ -28,7 +28,7 @@ class EventController{
             let event = null;
             event = await eventRepository.save(register);
 
-            return event ? res.status(200).json({message: 'Evento cadastrado com sucesso!'}) : res.status(409).json({message: 'Evento ja cadastrado!'});
+            return event ? res.status(200).json({message: 'Evento cadastrado com sucesso!'}) : res.status(400).json({message: 'Evento ja cadastrado!'});
 
         }catch(err){
             return res.status(500).json({
@@ -49,7 +49,7 @@ class EventController{
                         {location:Like(`%${req.query.location}%`)}
                     ] 
             });
-            return event ? res.json(event) : res.status(404).json({message: 'Evento nao encontrado!'});
+            return event ? res.json(event) : res.status(400).json({message: 'Evento nao encontrado!'});
         }catch(err){
             return res.status(500).json({
                 message: 'Erro ao buscar evento',
@@ -71,7 +71,7 @@ class EventController{
                 await eventRepository.update({id: req.params.id}, req.body);
                 return res.status(200).json({message: 'Evento atualizado com sucesso!'});
             }else if(!event){
-                return res.status(404).json({message: 'Evento nao encontrado!'});
+                return res.status(400).json({message: 'Evento nao encontrado!'});
             }else {
                 return res.status(401).json({message: 'Operação não autorizada!'});
             }
