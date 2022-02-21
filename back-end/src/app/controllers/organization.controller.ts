@@ -6,7 +6,17 @@ class OrganizationController {
     async index(req: Request, res: Response) : Promise<object> {
         try {
             const organizations = await getRepository(Organization).find();
-            return organizations ? res.json(organizations.map((organization)=>delete organization.password_hash)) : res.status(404).json({message: 'Organizações não encontradas!'});
+            const result = organizations.map((organization)=>{
+                return {
+                    id: organization.id,
+                    name: organization.name,
+                    email: organization.email,
+                    cnpj: organization.cnpj,
+                    phone: organization.phone,
+                    address: organization.address,                
+                }
+            });
+            return organizations ? res.json(result) : res.status(404).json({message: 'Organizações não encontradas!'});
         }catch(err) {
             return res.status(500).json({
                 message: 'Erro ao listar organizações',
@@ -19,15 +29,14 @@ class OrganizationController {
         const organizationRepository = getRepository(Organization);
         try{
             let organization = null;
-            if(!await organizationRepository.find({where: [{email:req.body.email},{cnpj:req.body.cnpj}]})){
+            const found = await organizationRepository.find({where: [{email:req.body.email},{cnpj:req.body.cnpj}]});
+            if(found.length === 0){
                 organization = await organizationRepository.save(req.body);
             }
             return organization ? res.status(200).json({message: 'Organização cadastrada com sucesso!'}) : res.status(409).json({message: 'Organização ja cadastrada!'});
-
         }catch(err){
-            console.error(err);
             return res.status(500).json({
-                message: 'Erro ao salvar organização',
+                message: 'Erro ao salvar Empresa',
                 data: err
             });
         }
@@ -45,7 +54,6 @@ class OrganizationController {
                 throw new Error('Ocorreu algum problema!');
             }
         }catch(err){
-            console.error(err);
             return res.status(500).json({
                 message: 'Erro ao atualizar organização',
                 data: err

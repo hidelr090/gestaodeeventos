@@ -7,7 +7,7 @@ const router = new (Router as any)();
 import authMiddleware from "../../app/middlewares/authentication/auth.middleware.js";
 
 router.get("/", customerController.index);
-router.post("/", authMiddleware, customerController.store);
-router.patch("/:id", authMiddleware, customerController.update);
+router.post("/", customerController.store);
+router.patch("/", authMiddleware, customerController.update);
 
 export default router;

@@ -23,20 +23,14 @@ class EventController{
                 throw new Error('Organização não encontrada!');
             }
 
+            const register = {...req.body, organization: {id: req.userId}};
+
             let event = null;
-            if(!await eventRepository.find({
-                where: [
-                    {name:Like(`%${req.body.name}%`)},
-                    {description:Like(`%${req.body.description}%`)}
-                ]
-            })){
-                    
-                event = await eventRepository.save({...req.body, organization_id: req.userId});
-            }
+            event = await eventRepository.save(register);
+
             return event ? res.status(200).json({message: 'Evento cadastrado com sucesso!'}) : res.status(409).json({message: 'Evento ja cadastrado!'});
 
         }catch(err){
-            console.error(err);
             return res.status(500).json({
                 message: 'Erro ao salvar evento',
                 data: err
@@ -70,7 +64,7 @@ class EventController{
             if(!await getRepository(Organization).find({where: [{id: req.userId}]})){
                 throw new Error('Organização não encontrada!');
             }
-            
+
             const event = await eventRepository.findOne({id: req.params.id});
         
             if(event && event.organization.id === req.userId){

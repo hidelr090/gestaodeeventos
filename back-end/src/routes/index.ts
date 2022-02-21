@@ -14,4 +14,7 @@ router.use('/organization', organization);
 import event from './EventRouter/event.router.js';
 router.use('/event', event);
 
+import ticket from './TicketRouter/ticket.router.js';
+router.use('/ticket', ticket);
+
 export default router;

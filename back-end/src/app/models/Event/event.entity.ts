@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn} from "typeorm";
 import { TicketInterface } from "../Ticket/ticket.interface.js";
 import { OrganizationInterface } from "../Organization/organization.interface.js";
+import { Organization } from "../Organization/organization.entity.js";
 
 @Entity()
 export class Event {
@@ -19,12 +20,21 @@ export class Event {
     @Column()
     location: string;
 
-    @OneToMany('Ticket', 'event')
+    @Column()
+    capacity: number;
+
+    @Column()
+    price: number;
+
+    @OneToMany('Ticket', 'event',{
+        cascade: true,
+    })
     tickets: TicketInterface[];
 
-    @ManyToOne('Organization', 'events', {
+    @ManyToOne(()=>Organization, organization => organization.events, {
         nullable: false,
     })
-    organization: OrganizationInterface;
+    @JoinColumn({name: 'organization_id', referencedColumnName: 'id'})
+    organization: Organization;
 
 }

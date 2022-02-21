@@ -13,6 +13,7 @@ export class CreateTicket1645342552139 implements MigrationInterface {
                         isPrimary: true,
                         isNullable: false,
                         generationStrategy: 'uuid',
+                        default: 'uuid_generate_v4()',
                     },
                     {
                         name: 'price',

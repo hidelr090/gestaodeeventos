@@ -8,8 +8,6 @@ const router = new (Router as any)();
 import authMiddleware from "../../app/middlewares/authentication/auth.middleware.js";
 
 router.get("/", ticketController.index);
-router.post("/", ticketController.store);
-router.patch("/", ticketController.availability);
-router.patch("/:id", ticketController.buy);
+router.post("/", authMiddleware, ticketController.store);
 
 export default router;

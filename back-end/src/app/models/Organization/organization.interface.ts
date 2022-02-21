@@ -3,6 +3,7 @@ export interface OrganizationInterface {
     name: string;
     description: string;
     password_hash?: string;
+    email: string;
     cnpj: string;
     phone: string;
     address: string;

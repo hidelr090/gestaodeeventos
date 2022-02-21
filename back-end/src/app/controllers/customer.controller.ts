@@ -7,8 +7,14 @@ class CustomerController {
     async index(req: Request, res: Response) : Promise<object> {
         try {
             const customers = await getRepository(Customer).find();
+            const result = customers.map((customer)=>{
+                return {
+                    id: customer.id,
+                    name: customer.name,
+                    email: customer.email,
+                }});
             
-            return customers ? res.json(customers.map((customer)=>delete customer.password_hash)) : res.status(404).json({message: 'Clientes nao encontrados!'});
+            return customers ? res.json(result) : res.status(404).json({message: 'Clientes nao encontrados!'});
         }catch(err) {
             return res.status(500).json({
                 message: 'Erro ao listar clientes',
@@ -21,13 +27,13 @@ class CustomerController {
         const customerRepository = getRepository(Customer);
         try{
             let customer = null;
-            if(!await customerRepository.find({where: [{email:req.body.email},{cpf:req.body.cpf}]})){
+            const found = await customerRepository.find({where: [{email:req.body.email},{cpf:req.body.cpf}]});
+            if(found.length === 0){
                 customer = await customerRepository.save(req.body);
             }
             return customer ? res.status(200).json({message: 'Cliente cadastrado com sucesso!'}) : res.status(409).json({message: 'Cliente ja cadastrado!'});
 
         }catch(err){
-            console.error(err);
             return res.status(500).json({
                 message: 'Erro ao salvar cliente',
                 data: err
@@ -47,7 +53,6 @@ class CustomerController {
                 throw new Error('Ocorreu algum problema!');
             }
         }catch(err){
-            console.error(err);
             return res.status(500).json({
                 message: 'Erro ao atualizar cliente',
                 data: err

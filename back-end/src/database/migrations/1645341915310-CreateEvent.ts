@@ -13,6 +13,7 @@ export class CreateEvent1645341915310 implements MigrationInterface {
                         isPrimary: true,
                         isNullable: false,
                         generationStrategy: 'uuid',
+                        default: 'uuid_generate_v4()',
                     },
                     {
                         name: 'name',
