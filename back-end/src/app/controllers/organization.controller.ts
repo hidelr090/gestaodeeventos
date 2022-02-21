@@ -5,18 +5,11 @@ import { Request, Response } from "express";
 class OrganizationController {
     async index(req: Request, res: Response) : Promise<object> {
         try {
-            const organizations = await getRepository(Organization).find();
-            const result = organizations.map((organization)=>{
-                return {
-                    id: organization.id,
-                    name: organization.name,
-                    email: organization.email,
-                    cnpj: organization.cnpj,
-                    phone: organization.phone,
-                    address: organization.address,                
-                }
+            const organizations = await getRepository(Organization).find({
+                select: ["id", "name", "email", "cnpj", "phone", "address"],
             });
-            return organizations ? res.json(result) : res.status(400).json({message: 'Organizações não encontradas!'});
+
+            return organizations ? res.json(organizations) : res.status(400).json({message: 'Organizações não encontradas!'});
         }catch(err) {
             return res.status(500).json({
                 message: 'Erro ao listar organizações',

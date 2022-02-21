@@ -6,15 +6,11 @@ class CustomerController {
     
     async index(req: Request, res: Response) : Promise<object> {
         try {
-            const customers = await getRepository(Customer).find();
-            const result = customers.map((customer)=>{
-                return {
-                    id: customer.id,
-                    name: customer.name,
-                    email: customer.email,
-                }});
+            const customers = await getRepository(Customer).find({
+                select: ["id", "name"],
+            });
             
-            return customers ? res.json(result) : res.status(400).json({message: 'Clientes nao encontrados!'});
+            return customers ? res.json(customers) : res.status(400).json({message: 'Clientes nao encontrados!'});
         }catch(err) {
             return res.status(500).json({
                 message: 'Erro ao listar clientes',
