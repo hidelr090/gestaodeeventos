@@ -19,7 +19,7 @@ export class Organization {
     @Column({
         transformer: myCrypt
     })
-    password_hash: string;
+    password_hash?: string;
 
     @Column()
     cnpj: string;

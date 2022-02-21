@@ -23,7 +23,7 @@ export class Customer {
     @Column({
         transformer: myCrypt
     })
-    password_hash: string;
+    password_hash?: string;
 
     @Column({
         transformer: myCrypt

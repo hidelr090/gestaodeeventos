@@ -2,7 +2,7 @@ export interface CustomerInterface {
     id: string;
     name: string;
     email: string;
-    password_hash: string;
+    password_hash?: string;
     cpf: string;
     phone: string;
     participation: number;

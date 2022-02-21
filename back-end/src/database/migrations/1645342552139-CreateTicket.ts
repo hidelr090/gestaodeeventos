@@ -23,6 +23,7 @@ export class CreateTicket1645342552139 implements MigrationInterface {
                         name: 'availability',
                         type: 'boolean',
                         isNullable: false,
+                        default: true,
                     },
                     {
                         name: 'payment_method',
