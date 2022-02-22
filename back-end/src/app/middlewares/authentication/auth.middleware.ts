@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import authConfig from '../../../config/auth.js';
+import { unauthorized } from '../../../utils/httpStatus.js';
 
 interface TokenPayload {
     id: string;
@@ -12,14 +13,10 @@ export default async function authMiddleware(req: Request, res: Response, next: 
     const  { authorization } = req.headers;
 
     if(!authorization){
-        return res.status(401).json({
-            error: 'Token nao fornecido!'
-        });
+        return unauthorized(res, 'Token não informado!');
     }
 
     const token = authorization.replace('Bearer', '').trim();
-
-
 
     try {
         const data = jwt.verify(token, authConfig.secret || 'secret');

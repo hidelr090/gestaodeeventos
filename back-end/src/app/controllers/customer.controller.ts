@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { Customer } from "../models/Customer/customer.entity.js";
 import {Request, Response} from "express";
+import { internalServerError, badRequest, ok} from "../../utils/httpStatus.js";
 
 class CustomerController {
     
@@ -10,12 +11,9 @@ class CustomerController {
                 select: ["id", "name"],
             });
             
-            return customers ? res.json(customers) : res.status(400).json({message: 'Clientes nao encontrados!'});
+            return customers ? res.json(customers) : badRequest(res, 'Nenhum cliente encontrado!');
         }catch(err) {
-            return res.status(500).json({
-                message: 'Erro ao listar clientes',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao buscar clientes!');
         }
     }
 
@@ -27,13 +25,10 @@ class CustomerController {
             if(found.length === 0){
                 customer = await customerRepository.save(req.body);
             }
-            return customer ? res.status(200).json({message: 'Cliente cadastrado com sucesso!'}) : res.status(400).json({message: 'Cliente ja cadastrado!'});
+            return customer ? ok(res, 'Cliente cadastrado com sucesso!') : badRequest(res, 'Cliente já cadastrado!');
 
         }catch(err){
-            return res.status(500).json({
-                message: 'Erro ao salvar cliente',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao cadastrar cliente!');
         }
     }
 
@@ -44,15 +39,12 @@ class CustomerController {
 
             if(customer){
                 await customerRepository.update({id: req.userId}, req.body);
-                return res.status(200).json({message: 'Cliente atualizado com sucesso!'});
+                return ok(res, 'Cliente atualizado com sucesso!');
             }else{
                 throw new Error('Ocorreu algum problema!');
             }
         }catch(err){
-            return res.status(500).json({
-                message: 'Erro ao atualizar cliente',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao atualizar cliente!');
         }
     }
 

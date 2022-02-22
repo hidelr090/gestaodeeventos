@@ -1,8 +1,8 @@
 import { getRepository, Like } from "typeorm";
 import { Ticket } from "../models/Ticket/ticket.entity.js";
 import { Request, Response } from "express";
-import {Customer} from "../models/Customer/customer.entity.js";
 import {Event} from "../models/Event/event.entity.js";
+import { badRequest, internalServerError, ok } from "../../utils/httpStatus.js";
 
 class TicketController {
     async index(req: Request, res: Response) {
@@ -12,12 +12,9 @@ class TicketController {
                     event_id: req.query.event_id
                 }
             });
-            return tickets ? res.json(tickets) : res.status(400).json({ message: "Tickets não encontrados!" });
+            return tickets ? res.json(tickets) : badRequest(res, "Nenhum ticket encontrado!");
         } catch (err) {
-            return res.status(500).json({
-                message: "Erro ao listar tickets",
-                data: err
-            });
+            return internalServerError(res, "Erro ao buscar tickets!");
         }
     }
     
@@ -39,18 +36,15 @@ class TicketController {
                 try{
                     await ticketRepository.save(ticketList);
                 }catch{
-                    throw new Error('Erro ao salvar tickets');
+                    return badRequest(res, "Erro ao salvar tickets!");
                 }
             }else{
-                throw new Error('Capacidade do evento atingida!');
+                return badRequest(res, "Capacidade do evento excedida!");
             }
 
-            return res.status(200).json({ message: "Tickets cadastrados com sucesso!" });
+            return ok(res, "Tickets cadastrados com sucesso!");
         } catch (err) {
-            return res.status(500).json({
-                message: "Erro ao salvar ticket",
-                data: err
-            });
+            return internalServerError(res, "Erro ao buscar tickets!");
         }
     }
 }

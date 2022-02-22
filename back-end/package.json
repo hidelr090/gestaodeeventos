@@ -9,7 +9,7 @@
   },
   "author": "Hidelgardo Ramirez Granja Barreto",
   "license": "MIT",
-  "module": "es6",
+  "module": "esnext",
   "type": "module",
   "devDependencies": {
     "typescript": "^4.5.5"

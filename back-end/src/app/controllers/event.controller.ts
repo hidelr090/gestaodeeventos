@@ -2,17 +2,15 @@ import { getRepository, Like } from "typeorm";
 import {Request, Response} from "express";
 import {Event} from "../models/Event/event.entity.js";
 import { Organization } from "../models/Organization/organization.entity.js";
+import { badRequest, internalServerError, ok} from "../../utils/httpStatus.js";
 
 class EventController{
     async index(req: Request, res: Response) : Promise<object> {
         try {
             const events = await getRepository(Event).find();
-            return events ? res.json(events) : res.status(400).json({message: 'Eventos nao encontrados!'});
+            return events ? res.json(events) : badRequest(res, 'Nenhum evento encontrado!');
         }catch(err) {
-            return res.status(500).json({
-                message: 'Erro ao listar eventos',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao buscar eventos!');
         }
     }
 
@@ -20,7 +18,7 @@ class EventController{
         const eventRepository = getRepository(Event);
         try{
             if(!await getRepository(Organization).find({where: [{id: req.userId}]})){
-                throw new Error('Organização não encontrada!');
+                return badRequest(res, 'Organização não encontrada!');
             }
 
             const register = {...req.body, organization: {id: req.userId}};
@@ -28,7 +26,7 @@ class EventController{
             let event = null;
             event = await eventRepository.save(register);
 
-            return event ? res.status(200).json({message: 'Evento cadastrado com sucesso!'}) : res.status(400).json({message: 'Evento ja cadastrado!'});
+            return event ? ok(res, 'Evento cadastrado com sucesso!') : badRequest(res, 'Evento nao cadastrado!');
 
         }catch(err){
             return res.status(500).json({
@@ -49,12 +47,9 @@ class EventController{
                         {location:Like(`%${req.query.location}%`)}
                     ] 
             });
-            return event ? res.json(event) : res.status(400).json({message: 'Evento nao encontrado!'});
+            return event ? res.json(event) : badRequest(res, 'Nenhum evento encontrado!');
         }catch(err){
-            return res.status(500).json({
-                message: 'Erro ao buscar evento',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao buscar eventos!');
         }
     }
 
@@ -62,25 +57,22 @@ class EventController{
         const eventRepository = getRepository(Event);
         try{
             if(!await getRepository(Organization).find({where: [{id: req.userId}]})){
-                throw new Error('Organização não encontrada!');
+                return badRequest(res, 'Organização não encontrada!');
             }
 
             const event = await eventRepository.findOne({id: req.params.id});
         
             if(event && event.organization.id === req.userId){
                 await eventRepository.update({id: req.params.id}, req.body);
-                return res.status(200).json({message: 'Evento atualizado com sucesso!'});
+                return ok(res, 'Evento atualizado com sucesso!');
             }else if(!event){
-                return res.status(400).json({message: 'Evento nao encontrado!'});
+                return badRequest(res, 'Evento não encontrado!');
             }else {
-                return res.status(401).json({message: 'Operação não autorizada!'});
+                return badRequest(res, 'Evento não pertence a sua organização!');
             }
 
         }catch(err){
-            return res.status(500).json({
-                message: 'Erro ao atualizar evento',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao atualizar evento!');
         }
     }
 }

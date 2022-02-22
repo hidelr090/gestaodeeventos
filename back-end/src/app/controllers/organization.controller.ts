@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { Organization } from "../models/Organization/organization.entity.js";
 import { Request, Response } from "express";
+import { internalServerError, ok, badRequest} from "../../utils/httpStatus.js";
 
 class OrganizationController {
     async index(req: Request, res: Response) : Promise<object> {
@@ -9,12 +10,9 @@ class OrganizationController {
                 select: ["id", "name", "email", "cnpj", "phone", "address"],
             });
 
-            return organizations ? res.json(organizations) : res.status(400).json({message: 'Organizações não encontradas!'});
+            return organizations ? res.json(organizations) : badRequest(res, 'Nenhuma organização encontrada!');
         }catch(err) {
-            return res.status(500).json({
-                message: 'Erro ao listar organizações',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao buscar organizações!');
         }
     }
 
@@ -26,12 +24,9 @@ class OrganizationController {
             if(found.length === 0){
                 organization = await organizationRepository.save(req.body);
             }
-            return organization ? res.status(200).json({message: 'Organização cadastrada com sucesso!'}) : res.status(400).json({message: 'Organização ja cadastrada!'});
+            return organization ? ok(res, 'Organização cadastrada!') : badRequest(res, 'Organização já cadastrada!');
         }catch(err){
-            return res.status(500).json({
-                message: 'Erro ao salvar Empresa',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao cadastrar organização!');
         }
     }
 
@@ -42,15 +37,12 @@ class OrganizationController {
 
             if(organization){
                 await organizationRepository.update({id: req.userId}, req.body);
-                return res.status(200).json({message: 'Organização atualizada com sucesso!'});
+                return ok(res, 'Organização atualizada com sucesso!');
             }else{
-                throw new Error('Ocorreu algum problema!');
+                return badRequest(res, 'Organização não encontrada!');
             }
         }catch(err){
-            return res.status(500).json({
-                message: 'Erro ao atualizar organização',
-                data: err
-            });
+            return internalServerError(res, 'Erro ao atualizar organização!');
         }
     }
 }

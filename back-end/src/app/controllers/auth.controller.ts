@@ -4,6 +4,7 @@ import { Organization } from "../models/Organization/organization.entity.js";
 import { Request, Response} from 'express';
 import jwt from 'jsonwebtoken';
 import auth from '../../config/auth.js'
+import { badRequest, internalServerError } from "../../utils/httpStatus.js";
 
 class Authentication {
     async authCustomer (req: Request, res: Response) : Promise<object>{
@@ -29,9 +30,7 @@ class Authentication {
                 token
             });
         }catch(err){
-            return res.status(500).json({
-                message:"Falha na autenticacao!"
-            })
+            return internalServerError(res, 'Falha na autenticação!');
         }
     }
 
@@ -47,7 +46,7 @@ class Authentication {
             });
 
             if(!organization){
-                return res.sendStatus(401);
+                return badRequest(res, 'Usuário ou senha inválidos!');
             }
 
             const token = jwt.sign({id: organization.id}, auth.secret || 'secret', {expiresIn: '3h'});
@@ -58,9 +57,7 @@ class Authentication {
                 token
             });
         }catch(err){
-            return res.status(500).json({
-                message:"Falha na autenticacao!"
-            });
+            return internalServerError(res, 'Falha na autenticação!');
         }
     }
 }
