@@ -10,10 +10,10 @@ const swaggerDoc = {
             "email": ""
         },
     },
-    "servers":[
+    "servers": [
         {
             "url": "http://localhost:8080/v1",
-            "description":"API Test Local Server"
+            "description": "API Test Local Server"
         }
     ],
     "securityDefinitions": {
@@ -23,24 +23,24 @@ const swaggerDoc = {
             "in": "header"
         }
     },
-    "paths":{
+    "paths": {
         "/customer": {
             "post": {
                 "parameters": [{
-                    "name": "body",
-                    "in": "body",
-                    "schema": {
-                        "$ref":"#/components/schemas/Customer"
-                    }
-                }],
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/components/schemas/Customer"
+                        }
+                    }],
                 "summary": "Registrar um novo usuario.",
                 "consumes": ["application/json"],
                 "tags": ["Customer"],
                 "description": "Registrar um novo usuario.",
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Customer"
                             }
                         }
@@ -53,7 +53,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Customer"
                                     }
                                 }
@@ -80,7 +80,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Customer"
                                     }
                                 }
@@ -97,21 +97,21 @@ const swaggerDoc = {
             },
             "patch": {
                 "parameters": [{
-                    "name": "body",
-                    "in": "body",
-                    "schema": {
-                        "$ref":"#/components/schemas/Customer"
-                    }
-                }],
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/components/schemas/Customer"
+                        }
+                    }],
                 "summary": "Atualizar dados cadastrais do usuario.",
                 "consumes": ["application/json"],
                 "tags": ["Customer"],
                 "security": [{ "bearerAuth": [] }],
                 "description": "Atualizar dados cadastrais do usuario.",
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Customer"
                             }
                         }
@@ -124,7 +124,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Customer"
                                     }
                                 }
@@ -143,20 +143,20 @@ const swaggerDoc = {
         "/auth/customer": {
             "post": {
                 "parameters": [{
-                    "name": "body",
-                    "in": "body",
-                    "schema": {
-                        "$ref":"#/components/schemas/Login"
-                    }
-                }],
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/components/schemas/Login"
+                        }
+                    }],
                 "summary": "Autenticacao do usuario.",
                 "consumes": ["application/json"],
                 "tags": ["Customer"],
                 "description": "Autenticacao do usuario.",
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Login"
                             }
                         }
@@ -169,7 +169,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Login"
                                     }
                                 }
@@ -188,20 +188,20 @@ const swaggerDoc = {
         "/organization": {
             "post": {
                 "parameters": [{
-                    "name": "body",
-                    "in": "body",
-                    "schema": {
-                        "$ref":"#/components/schemas/Organization"
-                    }
-                }],
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/components/schemas/Organization"
+                        }
+                    }],
                 "summary": "Registrar um novo usuario.",
                 "consumes": ["application/json"],
                 "tags": ["Organization"],
                 "description": "Registrar um novo usuario.",
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Organization"
                             }
                         }
@@ -214,7 +214,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Organization"
                                     }
                                 }
@@ -241,7 +241,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Organization"
                                     }
                                 }
@@ -258,21 +258,21 @@ const swaggerDoc = {
             },
             "patch": {
                 "parameters": [{
-                    "name": "body",
-                    "in": "body",
-                    "schema": {
-                        "$ref":"#/components/schemas/Organization"
-                    }
-                }],
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/components/schemas/Organization"
+                        }
+                    }],
                 "summary": "Atualizar dados cadastrais da organizacao cadastrada.",
                 "consumes": ["application/json"],
                 "tags": ["Organization"],
                 "security": [{ "bearerAuth": [] }],
                 "description": "Atualizar dados cadastrais da organizacao cadastrada.",
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Organization"
                             }
                         }
@@ -285,7 +285,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Organization"
                                     }
                                 }
@@ -304,20 +304,20 @@ const swaggerDoc = {
         "/auth/organization": {
             "post": {
                 "parameters": [{
-                    "name": "body",
-                    "in": "body",
-                    "schema": {
-                        "$ref":"#/components/schemas/Login"
-                    }
-                }],
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/components/schemas/Login"
+                        }
+                    }],
                 "summary": "Autenticacao do usuario.",
                 "consumes": ["application/json"],
                 "tags": ["Organization"],
                 "description": "Autenticacao do usuario.",
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Login"
                             }
                         }
@@ -330,7 +330,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Login"
                                     }
                                 }
@@ -349,21 +349,21 @@ const swaggerDoc = {
         "/event": {
             "post": {
                 "parameters": [{
-                    "name": "body",
-                    "in": "body",
-                    "schema": {
-                        "$ref":"#/components/schemas/Event"
-                    }
-                }],
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/components/schemas/Event"
+                        }
+                    }],
                 "summary": "Registrar um novo evento.",
                 "security": [{ "bearerAuth": [] }],
                 "consumes": ["application/json"],
                 "tags": ["Event"],
                 "description": "Registrar um novo evento.",
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Event"
                             }
                         }
@@ -376,7 +376,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Event"
                                     }
                                 }
@@ -392,21 +392,21 @@ const swaggerDoc = {
                 }
             },
             "get": {
-                "parameters":[
+                "parameters": [
                     {
                         "name": "name",
                         "in": "query",
                         "schema": {
                             "type": "string"
                         }
-                    },{
-                        "name":"description",
+                    }, {
+                        "name": "description",
                         "in": "query",
                         "schema": {
                             "type": "string"
                         }
-                    },{
-                        "name":"location",
+                    }, {
+                        "name": "location",
                         "in": "query",
                         "schema": {
                             "type": "string"
@@ -424,7 +424,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Event"
                                     }
                                 }
@@ -441,21 +441,21 @@ const swaggerDoc = {
             },
             "patch": {
                 "parameters": [{
-                    "name": "body",
-                    "in": "body",
-                    "schema": {
-                        "$ref":"#/components/schemas/Event"
-                    }
-                }],
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/components/schemas/Event"
+                        }
+                    }],
                 "summary": "Atualizar dados cadastrais do evento.",
                 "consumes": ["application/json"],
                 "tags": ["Event"],
                 "security": [{ "bearerAuth": [] }],
                 "description": "Atualizar dados cadastrais do evento.",
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Event"
                             }
                         }
@@ -468,7 +468,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Event"
                                     }
                                 }
@@ -487,11 +487,11 @@ const swaggerDoc = {
         "/ticket": {
             "post": {
                 "parameters": [
-                    { 
+                    {
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$ref":"#/components/schemas/Ticket"
+                            "$ref": "#/components/schemas/Ticket"
                         }
                     },
                     {
@@ -500,8 +500,8 @@ const swaggerDoc = {
                         "schema": {
                             "type": "uuid"
                         }
-                    },{
-                        "name":"amount",
+                    }, {
+                        "name": "amount",
                         "in": "query",
                         "schema": {
                             "type": "number"
@@ -513,10 +513,10 @@ const swaggerDoc = {
                 "tags": ["Ticket"],
                 "description": "Efetivar a compra de um ou mais ingressos.",
                 "security": [{ "bearerAuth": [] }],
-                "requestBody":{
-                    "content":{
-                        "application/json":{
-                            "schema":{
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
                                 "$ref": "#/components/schemas/Ticket"
                             }
                         }
@@ -529,7 +529,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Ticket"
                                     }
                                 }
@@ -545,7 +545,7 @@ const swaggerDoc = {
                 }
             },
             "get": {
-                "parameters":[
+                "parameters": [
                     {
                         "name": "event_id",
                         "in": "query",
@@ -565,7 +565,7 @@ const swaggerDoc = {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Ticket"
                                     }
                                 }
@@ -582,152 +582,151 @@ const swaggerDoc = {
             },
         }
     },
-    "components":{
-        "schemas":{
-            "Customer":{
+    "components": {
+        "schemas": {
+            "Customer": {
                 "type": "object",
-                "properties":{
-                    "name":{
+                "properties": {
+                    "name": {
                         "type": "string",
                         "description": "Nome do usuario",
                         "example": "João da Silva"
                     },
-                    "email":{
+                    "email": {
                         "type": "string",
                         "description": "Email do usuario",
                         "example": "joaodasilva@hotmail.com"
                     },
-                    "password_hash":{
+                    "password_hash": {
                         "type": "string",
                         "description": "Senha do usuario",
                         "example": "123456"
                     },
-                    "cpf":{
+                    "cpf": {
                         "type": "string",
                         "description": "CPF do usuario",
                         "example": "12345678909"
                     },
-                    "phone":{
+                    "phone": {
                         "type": "string",
                         "description": "Telefone do usuario",
                         "example": "11999999999"
                     },
-                    "participation":{
+                    "participation": {
                         "type": "number",
                         "description": "Participação do usuario",
                         "example": "0.00"
                     },
                 }
             },
-            "Login":{
+            "Login": {
                 "type": "object",
-                "properties":{
-                    "email":{
+                "properties": {
+                    "email": {
                         "type": "string",
                         "description": "Email do usuario",
                         "example": "joaodasilva@hotmail.com"
                     },
-                    "password_hash":{
+                    "password_hash": {
                         "type": "string",
                         "description": "Senha do usuario",
                         "example": "123456"
                     },
                 }
             },
-            "Organization":{
+            "Organization": {
                 "type": "object",
-                "properties":{
-                    "name":{
+                "properties": {
+                    "name": {
                         "type": "string",
                         "description": "Nome da organização",
                         "example": "UFBA"
                     },
-                    "email":{
+                    "email": {
                         "type": "string",
                         "description": "Email da organização",
                         "example": "ufba@ufba.edu.br"
                     },
-                    "password_hash":{
+                    "password_hash": {
                         "type": "string",
                         "description": "Senha da organização",
                         "example": "123456"
                     },
-                    "cnpj":{
+                    "cnpj": {
                         "type": "string",
                         "description": "CNPJ da organização",
                         "example": "12345678909"
                     },
-                    "phone":{
+                    "phone": {
                         "type": "string",
                         "description": "Telefone da organização",
                         "example": "11999999999"
                     },
-                    "description":{
+                    "description": {
                         "type": "string",
                         "description": "Descrição da organização",
                         "example": "UFBA é uma universidade brasileira."
                     },
-                    "address":{
+                    "address": {
                         "type": "string",
                         "description": "Endereço da organização",
                         "example": "Rua dos bobos, nº 0"
                     },
                 }
             },
-            "Event":{
+            "Event": {
                 "type": "object",
-                "properties":{
-                    "name":{
+                "properties": {
+                    "name": {
                         "type": "string",
                         "description": "Nome do evento",
                         "example": "Festa de aniversário"
                     },
-                    "description":{
+                    "description": {
                         "type": "string",
                         "description": "Descrição do evento",
                         "example": "Festa de aniversário da UFBA."
                     },
-                    "start_date":{
+                    "start_date": {
                         "type": "string",
                         "description": "Data do evento",
                         "example": "2020-01-01"
                     },
-                    "location":{
+                    "location": {
                         "type": "string",
                         "description": "Local do evento",
                         "example": "UFBA"
                     },
-                    "capacity":{
+                    "capacity": {
                         "type": "number",
                         "description": "Capacidade do evento",
                         "example": "100"
                     },
-                    "price":{
+                    "price": {
                         "type": "number",
                         "description": "Preço do evento",
                         "example": "100.00"
                     },
                 }
             },
-            "Ticket":{
+            "Ticket": {
                 "type": "object",
-                "properties":{
-                    "payment_method":{
+                "properties": {
+                    "payment_method": {
                         "type": "string",
                         "description": "Forma de pagamento",
                         "example": "Cartão de crédito"
                     }
                 }
-            }    
+            }
         }
     },
-    "securitySchemes":{
-        "bearerAuth":{
+    "securitySchemes": {
+        "bearerAuth": {
             "type": "http",
             "scheme": "bearer",
             "bearerFormat": "JWT"
         }
     }
-}
-
+};
 export default swaggerDoc;

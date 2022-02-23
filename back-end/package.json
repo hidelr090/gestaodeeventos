@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon --exec ts-node --files dist/index.js",
-    "typeorm": "node --loader ts-node/esm ./node_modules/typeorm/cli.js"
+    "typeorm": "node --loader ts-node/esm ./node_modules/typeorm/cli.js",
+    "start": "node --loader ts-node/esm ./dist/index.js"
   },
   "author": "Hidelgardo Ramirez Granja Barreto",
   "license": "MIT",
