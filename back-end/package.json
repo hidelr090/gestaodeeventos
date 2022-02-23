@@ -5,12 +5,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon --exec ts-node --files dist/index.js",
-    "typeorm": "node --loader ts-node/esm ./node_modules/typeorm/cli.js"
+    "typeorm": "node --loader ts-node/esm ./node_modules/typeorm/cli.js",
+    "start": "node ./dist/index.js"
   },
   "author": "Hidelgardo Ramirez Granja Barreto",
   "license": "MIT",
   "module": "esnext",
   "type": "module",
+  "keywords": [
+    "example",
+    "heroku"
+  ],
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "devDependencies": {
     "typescript": "^4.5.5"
   },
