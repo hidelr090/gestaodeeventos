@@ -35,11 +35,13 @@ export class CreateTicket1645342552139 implements MigrationInterface {
                         name: 'customer_id',
                         type: 'uuid',
                         isNullable: true,
+                        isUnique: false,
                     },
                     {
                         name: 'event_id',
                         type: 'uuid',
                         isNullable: false,
+                        isUnique: false,
                     },
                     {
                         name: 'created_at',

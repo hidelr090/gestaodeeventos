@@ -42,7 +42,7 @@ class EventController{
             const name = req.query.name || '';
             const description = req.query.description || '';
             const location = req.query.location || '';
-            const event = await eventRepository.findOne({
+            const event = await eventRepository.find({
                 where: 
                     
                         {name:Like(`%${name}%`),
