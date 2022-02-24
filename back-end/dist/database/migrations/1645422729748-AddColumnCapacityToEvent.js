@@ -20,12 +20,12 @@ export class AddColumnCapacityToEvent1645422729748 {
         await queryRunner.addColumn('ticket', new TableColumn({
             name: 'price',
             type: 'float',
-            isNullable: false,
+            isNullable: true,
         }));
         await queryRunner.addColumn('ticket', new TableColumn({
             name: 'availability',
             type: 'boolean',
-            isNullable: false,
+            isNullable: true,
         }));
     }
 }
