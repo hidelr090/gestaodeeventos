@@ -500,12 +500,6 @@ const swaggerDoc = {
                         "schema": {
                             "type": "uuid"
                         }
-                    },{
-                        "name":"amount",
-                        "in": "query",
-                        "schema": {
-                            "type": "number"
-                        }
                     }
                 ],
                 "summary": "Efetivar a compra de um ou mais ingressos.",
