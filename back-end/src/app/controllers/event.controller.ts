@@ -41,11 +41,11 @@ class EventController{
         try{
             const event = await eventRepository.findOne({
                 where: 
-                    [
-                        {name:Like(`%${req.query.name}%`)},
-                        {description:Like(`%${req.query.description}%`)},
-                        {location:Like(`%${req.query.location}%`)}
-                    ] 
+                    
+                        {name:Like(`%${req.query.name}%`),
+                        description:Like(`%${req.query.description}%`),
+                        location:Like(`%${req.query.location}%`)}
+                     
             });
             return event ? res.json(event) : badRequest(res, 'Nenhum evento encontrado!');
         }catch(err){
