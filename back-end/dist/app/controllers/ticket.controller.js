@@ -19,21 +19,16 @@ class TicketController {
     async store(req, res) {
         const ticketRepository = getRepository(Ticket);
         try {
-            const amount = req.query.amount || 1;
             const count = await ticketRepository.count({ where: { event: { id: req.query.event_id } } });
             const event = await getRepository(Event).findOne({ where: { id: req.query.event_id } });
             const total = count;
             const capacity = event === null || event === void 0 ? void 0 : event.capacity;
-            let ticketList = [];
-            for (let i = 0; i < amount; i++) {
-                ticketList.push(Object.assign(Object.assign({}, req.body), { event: { id: req.query.event_id }, customer: { id: req.userId } }));
-            }
-            if (total + amount <= capacity) {
+            if (total + 1 <= capacity) {
                 try {
-                    await ticketRepository.save(ticketList);
+                    await ticketRepository.save(Object.assign(Object.assign({}, req.body), { event: { id: req.query.event_id }, customer: { id: req.userId } }));
                 }
                 catch (_a) {
-                    return badRequest(res, "Erro ao salvar tickets!");
+                    return badRequest(res, "Erro ao salvar ticket!");
                 }
             }
             else {

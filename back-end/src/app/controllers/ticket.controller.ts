@@ -21,22 +21,16 @@ class TicketController {
     async store(req: Request, res: Response) {
         const ticketRepository = getRepository(Ticket);
         try {
-            const amount  = req.query.amount || 1;
-            
             const count = await ticketRepository.count({where:{event:{id: req.query.event_id}}});
             const event = await getRepository(Event).findOne({where:{id: req.query.event_id}});
             const total : any = count;
             const capacity : any = event?.capacity;
 
-            let ticketList = [];
-            for(let i = 0; i < amount; i++){
-                ticketList.push({ ...req.body, event:{id: req.query.event_id}, customer:{id: req.userId}});
-            }
-            if(total + amount <= capacity){
+            if(total + 1 <= capacity){
                 try{
-                    await ticketRepository.save(ticketList);
+                    await ticketRepository.save({ ...req.body, event:{id: req.query.event_id}, customer:{id: req.userId}});
                 }catch{
-                    return badRequest(res, "Erro ao salvar tickets!");
+                    return badRequest(res, "Erro ao salvar ticket!");
                 }
             }else{
                 return badRequest(res, "Capacidade do evento excedida!");
