@@ -554,10 +554,10 @@ const swaggerDoc = {
                         }
                     }
                 ],
-                "summary": "Listar todos os usuarios cadastrados.",
+                "summary": "Listar todos os ingressos associados ao evento informado.",
                 "consumes": ["application/json"],
                 "tags": ["Ticket"],
-                "description": "Listar todos os usuarios cadastrados.",
+                "description": "Listar todos os ingressos associados ao evento informado.",
                 "responses": {
                     "200": {
                         "description": "Sucesso",
